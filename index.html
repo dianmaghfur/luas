@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Luas Bangun Datar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        }
+        input, button {
+            margin: 10px;
+            padding: 8px;
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Kalkulator Luas dan Keliling</h2>
+        <select id="bangun" onchange="tampilkanForm()">
+            <option value="persegi">Persegi</option>
+            <option value="persegi_panjang">Persegi Panjang</option>
+            <option value="segitiga">Segitiga</option>
+            <option value="trapesium">Trapesium</option>
+            <option value="layang">Layang-layang</option>
+            <option value="belah">Belah Ketupat</option>
+            <option value="jajar">Jajar Genjang</option>
+            <option value="lingkaran">Lingkaran</option>
+        </select>
+        <div id="formInput"></div>
+        <p id="hasil"></p>
+    </div>
+    
+    <script>
+        function tampilkanForm() {
+            let bangun = document.getElementById("bangun").value;
+            let form = document.getElementById("formInput");
+            form.innerHTML = "";
+            let inputHTML = "";
+
+            switch (bangun) {
+                case "persegi":
+                    inputHTML = '<input id="sisi" type="number" placeholder="Masukkan sisi">' +
+                                '<button onclick="hitungLuasPersegi()">Hitung</button>';
+                    break;
+                case "persegi_panjang":
+                    inputHTML = '<input id="panjang" type="number" placeholder="Masukkan panjang">' +
+                                '<input id="lebar" type="number" placeholder="Masukkan lebar">' +
+                                '<button onclick="hitungLuasPersegiPanjang()">Hitung</button>';
+                    break;
+                case "segitiga":
+                    inputHTML = '<input id="alas" type="number" placeholder="Masukkan alas">' +
+                                '<input id="tinggi" type="number" placeholder="Masukkan tinggi">' +
+                                '<button onclick="hitungLuasSegitiga()">Hitung</button>';
+                    break;
+                case "trapesium":
+                    inputHTML = '<input id="atas" type="number" placeholder="Masukkan sisi atas">' +
+                                '<input id="bawah" type="number" placeholder="Masukkan sisi bawah">' +
+                                '<input id="tinggi" type="number" placeholder="Masukkan tinggi">' +
+                                '<button onclick="hitungLuasTrapesium()">Hitung</button>';
+                    break;
+                case "layang":
+                case "belah":
+                    inputHTML = '<input id="d1" type="number" placeholder="Masukkan diagonal 1">' +
+                                '<input id="d2" type="number" placeholder="Masukkan diagonal 2">' +
+                                '<button onclick="hitungLuasLayangBelah()">Hitung</button>';
+                    break;
+                case "jajar":
+                    inputHTML = '<input id="alas" type="number" placeholder="Masukkan alas">' +
+                                '<input id="tinggi" type="number" placeholder="Masukkan tinggi">' +
+                                '<button onclick="hitungLuasJajarGenjang()">Hitung</button>';
+                    break;
+                case "lingkaran":
+                    inputHTML = '<input id="jari" type="number" placeholder="Masukkan jari-jari">' +
+                                '<button onclick="hitungLuasKelilingLingkaran()">Hitung</button>';
+                    break;
+            }
+            form.innerHTML = inputHTML;
+        }
+
+        function hitungLuasKelilingLingkaran() {
+            let jari = document.getElementById("jari").value;
+            let phi = (jari % 7 === 0) ? (22/7) : 3.14;
+            document.getElementById("hasil").innerText = "Luas: " + (phi * jari * jari) + " | Keliling: " + (2 * phi * jari);
+        }
+    </script>
+</body>
+</html>
